@@ -1,0 +1,81 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierda = None
+        self.derecha = None
+
+class ArbolBinario:
+    def __init__(self):
+        self.raiz = None
+
+    # Función para contar la cantidad de nodos en el árbol
+    def contar_nodos(self):
+        return self._contar_nodos(self.raiz)
+
+    def _contar_nodos(self, nodo):
+        if nodo is None:
+            return 0
+        return 1 + self._contar_nodos(nodo.izquierda) + self._contar_nodos(nodo.derecha)
+
+    # Función para contar la cantidad de nodos hoja (sin hijos)
+    def contar_nodos_hoja(self):
+        return self._contar_nodos_hoja(self.raiz)
+
+    def _contar_nodos_hoja(self, nodo):
+        if nodo is None:
+            return 0
+        if nodo.izquierda is None and nodo.derecha is None:
+            return 1
+        return self._contar_nodos_hoja(nodo.izquierda) + self._contar_nodos_hoja(nodo.derecha)
+
+    # Función para contar la cantidad de nodos internos (con al menos un hijo)
+    def contar_nodos_internos(self):
+        return self.contar_nodos() - self.contar_nodos_hoja()
+
+    # Función para calcular la altura del árbol (longitud del camino más largo desde la raíz hasta una hoja)
+    def altura(self):
+        return self._altura(self.raiz)
+
+    def _altura(self, nodo):
+        if nodo is None:
+            return 0
+        altura_izquierda = self._altura(nodo.izquierda)
+        altura_derecha = self._altura(nodo.derecha)
+        return max(altura_izquierda, altura_derecha) + 1
+
+    # Función para calcular la profundidad de un nodo (longitud del camino desde la raíz hasta el nodo)
+    def profundidad(self, valor):
+        return self._profundidad(self.raiz, valor, 0)
+
+    def _profundidad(self, nodo, valor, nivel):
+        if nodo is None:
+            return -1
+        if nodo.valor == valor:
+            return nivel
+        profundidad_izquierda = self._profundidad(nodo.izquierda, valor, nivel + 1)
+        profundidad_derecha = self._profundidad(nodo.derecha, valor, nivel + 1)
+        if profundidad_izquierda != -1:
+            return profundidad_izquierda
+        return profundidad_derecha
+
+    # Función para encontrar el nodo con el valor mínimo en el árbol
+    def encontrar_minimo(self):
+        return self._encontrar_minimo(self.raiz)
+
+    def _encontrar_minimo(self, nodo):
+        if nodo is None:
+            return float('inf')
+        min_izquierda = self._encontrar_minimo(nodo.izquierda)
+        min_derecha = self._encontrar_minimo(nodo.derecha)
+        return min(min_izquierda, min_derecha, nodo.valor)
+
+    # Función para encontrar el nodo con el valor máximo en el árbol
+    def encontrar_maximo(self):
+        return self._encontrar_maximo(self.raiz)
+
+    def _encontrar_maximo(self, nodo):
+        if nodo is None:
+            return float('-inf')
+        max_izquierda = self._encontrar_maximo(nodo.izquierda)
+        max_derecha = self._encontrar_maximo(nodo.derecha)
+        return max(max_izquierda, max_derecha, nodo.valor)
