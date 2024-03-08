@@ -1,0 +1,66 @@
+class Nodo:
+    def __init__(self,dato):
+        self.dato = dato
+        self.siguiente = None
+class ListaEnlazadaSilmple:
+    def __init__(self):
+        self.inicio = None
+    def agregar_inicio(self, dato):
+        NuevoNodo = Nodo(dato)
+        if not self.inicio:
+            self.inicio = NuevoNodo
+        else:
+            NuevoNodo.siguiente = self.inicio
+            self.inicio = NuevoNodo
+    def agergar_detras(self,dato):
+        NuevoNodo = Nodo(dato)
+        auxiliar = self.inicio
+        if not self.inicio:
+            self.inicio = NuevoNodo
+        else:
+            while auxiliar.siguiente:
+                auxiliar = auxiliar.siguiente
+            axuliar.siguiente = NuevoNodo
+    def buscarNodo(self, buscado):
+        auxiliar = self.inicio
+        while auxiliar.dato != buscado:
+            auxiliar = auxiliar.siguiente
+        print(f"el auxiliar {buscado}, si existe")
+    def sumar_nodos(self):
+        auxiliar = self.inicio
+        a = 0
+        while auxiliar:
+            a += auxiliar.dato
+            auxiliar = auxiliar.siguiente
+        print(f"el total de la suma de nodos es {a}")
+    def concatenar_listas(self, lista):
+        auxiliar = self.inicio
+        while auxiliar.siguiente:
+            auxiliar = auxiliar.siguiente
+        auxiliar.siguiente = lista.inicio
+    def logitud_lista(self):
+        auxiliar = self.inicio
+        a = 0
+        while auxiliar:
+            a += 1
+            auxiliar = auxiliar.siguiente
+        print(f"la logitud de la lsiat es {a}")
+    def eliminar_repetidos(self):
+        auxiliar = self.inicio
+        elementos = set()
+        while auxiliar.siguiente:
+            if auxiliar.siguiente.dato in elementos:
+                auxiliar.siguiente =auxiliar.siguiente.siguiente
+            else:
+                auxiliar = auxiliar.siguiente
+    def imprimir(self):
+        auxiliar = self.inicio
+        while auxiliar:
+            print(auxiliar.dato, end="-->")
+            auxiliar = auxiliar.siguiente
+milista = ListaEnlazadaSilmple()
+milista.agregar_inicio(1)
+milista.agregar_inicio(2)
+milista.agregar_inicio(3)
+milista.agregar_inicio(4)
+milista.imprimir()
