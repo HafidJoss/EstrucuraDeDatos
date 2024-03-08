@@ -1,0 +1,76 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.debajo = None
+class Pila:
+    def __init__(self):
+        self.cima = None
+    def apilar(self, dato):
+        NuevoNodo = Nodo(dato)
+        if not self.cima:
+            self.cima = NuevoNodo
+        else:
+            NuevoNodo.debajo = self.cima
+            self.cima = NuevoNodo
+    def desapilar(self):
+        if not self.cima:
+            print("la pila está vacia")
+            return
+        else:
+            auxiliar = self.cima
+            self.cima = auxiliar.debajo
+            auxiliar = None
+    def imprimir(self):
+        auxiliar = self.cima
+        while auxiliar:
+            print(auxiliar.dato, end="\n")
+            auxiliar = auxiliar.debajo
+    def invertir_pila(self):
+        auxiliar = self.cima
+        Nueva_pila = Pila()
+        while self.cima:
+            Nueva_pila.apilar(self.cima.dato)
+            self.desapilar()
+        self.cima = Nueva_pila.cima
+def verificar_operadores(expresion):
+    pila = []
+    operadores_abiertos = {'(': ')', '[': ']', '{': '}'}
+    operadores_cerrados = operadores_abiertos.values()
+    for caracter in expresion:
+        if caracter in operadores_abiertos:
+            pila.append(caracter)
+        elif caracter in operadores_cerrados:
+            if not pila or operadores_abiertos[pila.pop()] != caracter:
+                return False
+
+    return not pila
+def ordenar_pila(pila):
+    pila_auxiliar = []
+    while pila:
+        tmp = pila.pop()
+        while pila_auxiliar and pila_auxiliar[-1] > tmp:
+            pila.append(pila_auxiliar.pop())
+        pila_auxiliar.append(tmp)
+    while pila_auxiliar:
+        pila.append(pila_auxiliar.pop())
+    return pila
+def eliminar_duplicados_pila(pila):
+    elementos_vistos = set()
+    pila_auxiliar = []
+    while pila:
+        elemento = pila.pop()
+        if elemento not in elementos_vistos:
+            pila_auxiliar.append(elemento)
+            elementos_vistos.add(elemento)
+    while pila_auxiliar:
+        pila.append(pila_auxiliar.pop())
+    return pila
+def es_palindromo(cadena):
+    cadena_normalizada = ''.join(cadena.lower().split())
+    pila = []
+    for caracter in cadena_normalizada:
+        pila.append(caracter)
+    cadena_invertida = ''
+    while pila:
+        cadena_invertida += pila.pop()
+    return cadena_normalizada == cadena_invertida
