@@ -1,0 +1,85 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+        self.anterior = None
+class ListaEnlazadasDosbles:
+    def __init__(self):
+        self.inicio = None
+        self.fin = None
+    def agregarInicio(self,dato):
+        NuevoNodo = Nodo(dato)
+        if not self.inicio:
+            self.inicio = NuevoNodo
+            self.fin = NuevoNodo
+        else:
+            NuevoNodo.siguiente = self.inicio
+            self.inicio.anterior = NuevoNodo
+            self.inicio = NuevoNodo
+    def agregarFinal(self,dato):
+        NuevoNodo = Nodo(dato)
+        if not self.fin:
+            self.fin = NuevoNodo
+            self.inicio = NuevoNodo
+        else:
+            NuevoNodo.anterior = self.fin
+            self.fin.siguiente = NuevoNodo
+            self.fin = NuevoNodo
+    def imprimir(self):
+        actual = self.inicio
+        while actual:
+            print(actual.dato, end="-->")
+            actual = actual.siguiente
+    def duplicar_nodos(self):
+        actual = self.inicio
+        while actual:
+            duplicado = Nodo(actual.dato)
+            duplicado.siguiente = actual.siguiente
+            duplicado.anterior = actual
+            if actual.siguiente:
+                actual.siguiente.anterior = duplicado
+            actual.siguiente = duplicado
+            actual = duplicado.siguiente
+    def contar_pares_e_impares(self):
+        actual = self.inicio
+        pares = 0
+        impares = 0
+        while actual:
+            if actual.dato%2 == 0 :
+                pares +=1
+            else :
+                impares +=1
+            actual = actual.siguiente
+        print(f"tenemos: {pares} pares y {impares} impares")
+    def insertar_nodo_en(self, posicion, dato):
+        NuevoNodo = Nodo(dato)
+        lugar = 1
+        actual = self.inicio
+        while lugar != posicion:
+            actual = actual.siguiente
+            lugar += 1
+        actual.siguiente.anterior = NuevoNodo
+        NuevoNodo.siguiente = actual.siguiente
+        NuevoNodo.anterior = actual
+        actual.siguiente = NuevoNodo
+    def eliminar_nodos_duplicado(self):
+        elementos = set()
+        actual = self.inicio
+        elementos.add(actual.dato)
+        while actual.siguiente:
+            if actual.siguiente.dato in elementos:
+                actual.siguiente.siguiente.anterior = actual
+                actual.siguiente = actual.siguiente.siguiente
+            else:
+                elementos.add(actual.siguiente.dato)
+                actual = actual.siguiente
+    def ivertir_lista(self):
+        actual = self.inicio
+        while actual.siguiente:
+            if actual.siguiente.siguiente == None:
+                self.agregarInicio(actual.siguiente.dato)
+                actual.siguiente = None
+            else:
+                self.agregarInicio(actual.siguiente.dato)
+                actual.siguiente.siguiente.anterior = actual
+                actual.siguiente = actual.siguiente.siguiente
