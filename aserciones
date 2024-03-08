@@ -1,0 +1,27 @@
+#verificar edad 1
+def validar_edad(edad):
+    assert isinstance(edad, int) and edad > 0, "La edad debe ser un entero positivo"
+    assert edad >= 18, "Debes ser mayor de edad para continuar"
+    print("La edad es válida.")
+#validar tipo de dato #2
+def validar_tipo_dato(elemento, tipo):
+    assert isinstance(elemento, tipo),f"El elemento no es de tipo {tipo} "
+#validar calificacion 3
+def validar_calificacion(calificacion):
+    assert 0 <= calificacion <= 100, "La calificación debe estar en el rango de 0 a 100"
+    print("La calificación es válida.")
+#validar lista 4
+def validar_lista_no_vacia(lista):
+    assert len(lista) == 0,"La lista no debe estar vacia"
+#validar igualdad 5
+def validar_igualdad(objeto1, objeto2):
+    assert objeto1 == objeto2, "Los objetos no son iguales"
+    print("Los objetos son iguales.")
+#validar si retorna un valor en especifico 7
+def validad_respuesta(funcion):
+    assert funcion == True, "La funcion es valida"
+    print("La funcion es true")
+#validar estado de una variable 8
+def validar_estado(variable, valor_esperado):
+    print(f"El valor actual de la variable es: {variable}")
+    assert variable == valor_esperado,"El valor de la variable es distinto"
