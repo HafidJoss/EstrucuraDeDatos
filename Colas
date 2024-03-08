@@ -1,0 +1,63 @@
+from collections import deque
+class cola:
+    def __init__(self):
+        self.valores = deque()
+    def esta_vacia(self):
+        return len(self.valores) == 0
+    def emcolar(self, dato):
+        self.valores.append(dato)
+    def descolar(self):
+        if not self.esta_vacia():
+            return self.valores.popleft()
+        else:
+            return None
+def es_palindromo(palabra):
+    palabra_normalizada = ''.join(palabra.lower().split())
+    cola = deque(palabra_normalizada)
+    while len(cola) > 1:
+        if cola.popleft() != cola.pop():
+            return False
+    return True
+class SistemaGestionPedidos:
+    def __init__(self):
+        self.cola_pedidos = deque()
+    def agregar_pedido(self, pedido):
+        self.cola_pedidos.append(pedido)
+        print(f"Pedido agregado: {pedido}")
+    def procesar_pedido(self):
+        if self.cola_pedidos:
+            pedido_procesado = self.cola_pedidos.popleft()
+            print(f"Pedido procesado: {pedido_procesado}")
+        else:
+            print("No hay pedidos para procesar.")
+    def mostrar_estado_cola(self):
+        print("Estado actual de la cola de pedidos:")
+        for pedido in self.cola_pedidos:
+            print(pedido)
+class GestionTareas:
+    def __init__(self):
+        self.cola_tareas = deque()
+        self.tareas_completadas = deque()
+
+    def agregar_tarea(self, tarea):
+        self.cola_tareas.append(tarea)
+        print(f"Tarea agregada: {tarea}")
+
+    def tarea_completada(self):
+        if self.cola_tareas:
+            tarea = self.cola_tareas.popleft()
+            self.tareas_completadas.append(tarea)
+            print(f"Tarea completada: {tarea}")
+        else:
+            print("No hay tareas pendientes.")
+
+    def mostrar_proxima_tarea(self):
+        if self.cola_tareas:
+            print(f"Próxima tarea pendiente: {self.cola_tareas[0]}")
+        else:
+            print("No hay tareas pendientes.")
+
+    def mostrar_tareas_completadas(self):
+        print("Tareas completadas:")
+        for tarea in self.tareas_completadas:
+            print(tarea)
