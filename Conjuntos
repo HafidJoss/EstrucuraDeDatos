@@ -1,1 +1,51 @@
-
+#1
+def es_primo(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+def filtrar_primos(numeros):
+    return {num for num in numeros if es_primo(num)}
+#2
+def filtrar_palabras_por_letra(palabras, letra):
+    return {palabra for palabra in palabras if palabra.startswith(letra)}
+#3
+def filtrar_divisibles(numeros, divisor):
+    if divisor == 0:
+        return "Error: El divisor no puede ser cero."
+    return {num for num in numeros if num % divisor == 0}
+#4
+def interseccion_conjuntos(conjunto1, conjunto2):
+    return conjunto1.intersection(conjunto2)
+#5
+def diferencia_conjuntos(conjunto1, conjunto2):
+    return conjunto1.difference(conjunto2)
+#6
+def diferencia_simetrica_conjuntos(conjunto1, conjunto2):
+    return conjunto2.difference(conjunto1)
+#7
+def encontrar_anagramas(palabras):
+    anagramas = {}
+    for palabra in palabras:
+        clave = ''.join(sorted(palabra))
+        if clave in anagramas:
+            anagramas[clave].add(palabra)
+        else:
+            anagramas[clave] = {palabra}
+    return {clave: valor for clave, valor in anagramas.items() if len(valor) > 1}
+#8
+def encontrar_palindromos(palabras):
+    palindromos = set()
+    for palabra in palabras:
+        if palabra == palabra[::-1]:
+            palindromos.add(palabra)
+    return palindromos
+#9
+def filtrar_por_longitud(palabras, longitud):
+    palabras_filtradas = set()
+    for palabra in palabras:
+        if len(palabra) == longitud:
+            palabras_filtradas.add(palabra)
+    return palabras_filtradas
