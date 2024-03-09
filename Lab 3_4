@@ -1,0 +1,74 @@
+import numpy as np
+def numeros_pares(n=2):
+    if n <= 100:
+        print(n)
+        numeros_pares(n + 2)
+numeros_pares()
+# Ejercicio 2
+def suma_hasta_n(n):
+    if n == 1:
+        return 1
+    else:
+        return n + suma_hasta_n(n - 1)
+print("La suma de los números del 1 al n es:", suma_hasta_n(100))
+# Ejercicio 3
+def piramide_numeros(n):
+    if n > 0:
+        piramide_numeros(n - 1)
+        print(" " * (n - 1) + "* " * (n))
+piramide_numeros(5)
+# Ejercicio 4
+def piramide_numeros_invertidos(n):
+    if n > 0:
+        print("* " * n)
+        piramide_numeros_invertidos(n - 1)
+piramide_numeros_invertidos(5)
+# Ejercicio 5
+def tabla_multiplicar(n, i=1):
+    if i <= 10:
+        print(f"{n} x {i} = {n*i}")
+        tabla_multiplicar(n, i + 1)
+tabla_multiplicar(5)
+# Ejercicio 6
+matriz_reales = np.random.rand(100, 100)
+# Ejercicio 7
+matriz_complejos = np.random.rand(5, 5) + np.random.rand(5, 5) * 1j
+# Ejercicio 8
+matriz_de_matrices = np.array([[np.random.rand(2, 2), np.random.rand(2, 2)],
+                                [np.random.rand(2, 2), np.random.rand(2, 2)]])
+# Ejercicio 9
+def elemento_central(matriz):
+    filas, columnas = matriz.shape
+    fila_central = filas // 2
+    columna_central = columnas // 2
+    return matriz[fila_central, columna_central]
+print("Elemento central de la matriz de números reales:", elemento_central(matriz_reales))
+# Ejercicio 10
+matriz1 = np.random.rand(3, 3)
+matriz2 = np.random.rand(3, 3)
+suma_matrices = matriz1 + matriz2
+# Ejercicio 11
+matriz_a_multiplicar = np.random.rand(3, 3)
+numero = 5
+matriz_multiplicada = matriz_a_multiplicar * numero
+# Ejercicio 12
+media_matriz = np.mean(matriz_reales)
+# Ejercicio 13
+mediana_matriz = np.median(matriz_reales)
+desviacion_estandar_matriz = np.std(matriz_reales)
+# Ejercicio 14
+elemento_maximo = np.max(matriz_reales)
+# Ejercicio 15:
+def submatriz_mayor_suma(matriz):
+    filas, columnas = matriz.shape
+    max_suma = float('-inf')
+    indices = None
+    for i in range(filas):
+        for j in range(columnas):
+            for k in range(i, filas):
+                for l in range(j, columnas):
+                    suma_actual = np.sum(matriz[i:k+1, j:l+1])
+                    if suma_actual > max_suma:
+                        max_suma = suma_actual
+                        indices = ((i, j), (k, l))
+    return indices
