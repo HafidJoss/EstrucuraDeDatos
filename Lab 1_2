@@ -1,0 +1,60 @@
+import math
+
+def operaciones_basicas(a, b):
+    suma = a + b
+    resta = a - b
+    multiplicacion = a * b
+    division = a / b if b != 0 else "No se puede dividir entre cero"
+    return suma, resta, multiplicacion, division
+def verificar_par_impar(numero):
+    return "Par" if numero % 2 == 0 else "Impar"
+def area_triangulo(base, altura):
+    return (base * altura) / 2
+def factorial(numero):
+    if numero == 0:
+        return 1
+    else:
+        return numero * factorial(numero - 1)
+def es_primo(numero):
+    if numero < 2:
+        return False
+    for i in range(2, int(math.sqrt(numero)) + 1):
+        if numero % i == 0:
+            return False
+    return True
+def invertir_cadena(cadena):
+    return cadena[::-1]
+def suma_numeros_pares(inicio, fin):
+    suma = 0
+    for i in range(inicio, fin + 1):
+        if i % 2 == 0:
+            suma += i
+    return suma
+def lista_cuadrados(n):
+    return [i ** 2 for i in range(1, n + 1)]
+def contar_vocales(cadena):
+    vocales = 'aeiouAEIOU'
+    return sum(1 for char in cadena if char in vocales)
+def fibonacci(n):
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+    return fib[:n]
+def ordenar_lista(lista):
+    return sorted(lista)
+def es_palindromo(palabra):
+    palabra = palabra.lower().replace(" ", "")
+    return palabra == palabra[::-1]
+def tabla_multiplicar(numero):
+    tabla = []
+    for i in range(1, 11):
+        tabla.append(numero * i)
+    return tabla
+def area_circulo(radio):
+    return math.pi * radio ** 2
+def suma_digitos(numero):
+    suma = 0
+    while numero > 0:
+        suma += numero % 10
+        numero //= 10
+    return suma
